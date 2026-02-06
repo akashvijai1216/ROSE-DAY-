@@ -3,37 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <title>Happy Rose Day ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body {
   margin: 0;
+  height: 100vh;
   font-family: 'Segoe UI', sans-serif;
   background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
   overflow-x: hidden;
-  color: #fff;
-}
-
-section {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  color: white;
   text-align: center;
-  padding: 30px;
 }
 
-.card {
-  background: rgba(255,255,255,0.2);
-  padding: 25px;
-  border-radius: 20px;
+.container {
   max-width: 700px;
-  width: 100%;
-  backdrop-filter: blur(6px);
+  margin: auto;
+  padding: 30px;
+  background: rgba(0,0,0,0.25);
+  border-radius: 20px;
 }
 
-h1 { font-size: 2.5em; margin-bottom: 10px; }
-h2 { margin-bottom: 15px; }
+h1, h2 {
+  margin-bottom: 15px;
+}
 
 textarea {
   width: 100%;
@@ -41,45 +34,39 @@ textarea {
   border-radius: 10px;
   border: none;
   padding: 10px;
-  font-size: 1em;
-}
-
-button {
-  margin-top: 15px;
-  padding: 10px 25px;
-  font-size: 1em;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  background: #ff4d6d;
-  color: white;
-}
-
-.emoji {
-  font-size: 3em;
-  margin: 10px;
+  font-size: 16px;
+  margin-bottom: 25px;
 }
 
 input[type="file"] {
-  margin-top: 10px;
+  margin: 15px 0;
+  color: white;
 }
 
-img.preview {
-  width: 150px;
-  margin: 10px;
-  border-radius: 15px;
+button {
+  padding: 12px 30px;
+  border-radius: 30px;
+  border: none;
+  background: #ff4d6d;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
 }
 
-/* Roses & hearts */
-.rose, .heart {
+.emoji {
+  font-size: 40px;
+}
+
+.rose {
   position: fixed;
-  top: -10%;
+  top: -50px;
+  font-size: 25px;
   animation: fall linear infinite;
 }
 
 @keyframes fall {
   to {
-    transform: translateY(110vh) rotate(360deg);
+    transform: translateY(110vh);
   }
 }
 </style>
@@ -87,113 +74,55 @@ img.preview {
 
 <body>
 
-<!-- START PAGE -->
-<section>
-  <div class="card">
-    <h1>Happy Rose Day, My Love 🌹</h1>
-    <div class="emoji">🌹🤲🌹</div>
-    <p>Something special, just for you ❤️</p>
-    <button onclick="next()">Begin</button>
-  </div>
-</section>
+<div class="container">
+  <h1>🌹 Happy Rose Day My Love 🌹</h1>
+  <div class="emoji">🥰🌹🤗🌹</div>
 
-<!-- QUESTIONS -->
-<section>
-  <div class="card">
+  <!-- FORM START -->
+  <form 
+    action="https://formspree.io/f/abcdwxyz"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+
     <h2>If our story were a rose, what would it mean to you?</h2>
-    <textarea></textarea>
-    <button onclick="next()">Next</button>
-  </div>
-</section>
+    <textarea name="story_as_rose" required></textarea>
 
-<section>
-  <div class="card">
     <h2>Would you like to be the one I choose on every Rose Day?</h2>
-    <textarea></textarea>
-    <button onclick="next()">Next</button>
-  </div>
-</section>
+    <textarea name="choose_every_rose_day" required></textarea>
 
-<section>
-  <div class="card">
     <h2>Can I give you my heart the same way I give you this rose?</h2>
-    <textarea></textarea>
-    <button onclick="next()">Next</button>
-  </div>
-</section>
+    <textarea name="give_my_heart" required></textarea>
 
-<section>
-  <div class="card">
     <h2>Do you see us blooming together, today and always?</h2>
-    <textarea></textarea>
-    <button onclick="next()">Next</button>
-  </div>
-</section>
+    <textarea name="blooming_together" required></textarea>
 
-<!-- PHOTO UPLOAD -->
-<section>
-  <div class="card">
-    <h2>Our Moments Together 📸</h2>
-    <p>Upload our photos ❤️</p>
-    <input type="file" multiple accept="image/*" onchange="previewImages(event)">
-    <div id="preview"></div>
-    <button onclick="next()">Next</button>
-  </div>
-</section>
+    <h2>Upload your beautiful photos 📸</h2>
+    <input type="file" name="uploaded_photos" multiple required>
 
-<!-- FINAL QUESTION -->
-<section>
-  <div class="card">
-    <h1>Will you be my forever rose? 🌹</h1>
-    <button onclick="yes()">Yes ❤️</button>
-    <button onclick="no()">No 🙈</button>
-  </div>
-</section>
+    <h2>🌹 Will you be my forever rose? 🌹</h2>
+    <label>
+      <input type="radio" name="forever_rose" value="Yes" required> Yes 🌹
+    </label>
+    <br><br>
+    <label>
+      <input type="radio" name="forever_rose" value="No"> No
+    </label>
+
+    <br><br><br>
+    <button type="submit">Send My Answers ❤️</button>
+
+  </form>
+</div>
 
 <script>
-let current = 0;
-const sections = document.querySelectorAll("section");
-
-function next() {
-  sections[current].style.display = "none";
-  current++;
-  sections[current].style.display = "flex";
-}
-
-sections.forEach((s,i)=> i!==0 && (s.style.display="none"));
-
-function previewImages(e) {
-  const preview = document.getElementById("preview");
-  preview.innerHTML = "";
-  [...e.target.files].forEach(file=>{
-    const img = document.createElement("img");
-    img.className = "preview";
-    img.src = URL.createObjectURL(file);
-    preview.appendChild(img);
-  });
-}
-
-function yes() {
-  alert("You just made my heart bloom forever 🌹❤️");
-  startRoseShower();
-}
-
-function no() {
-  alert("Still a beautiful rose in my life 🌹");
-  startRoseShower();
-}
-
-function startRoseShower() {
-  setInterval(()=>{
-    const r = document.createElement("div");
-    r.className = "rose";
-    r.innerHTML = "🌹";
-    r.style.left = Math.random()*100 + "vw";
-    r.style.fontSize = Math.random()*30+20+"px";
-    r.style.animationDuration = Math.random()*3+4+"s";
-    document.body.appendChild(r);
-    setTimeout(()=>r.remove(),7000);
-  },300);
+for (let i = 0; i < 30; i++) {
+  const rose = document.createElement("div");
+  rose.className = "rose";
+  rose.innerHTML = "🌹";
+  rose.style.left = Math.random() * 100 + "vw";
+  rose.style.animationDuration = (3 + Math.random() * 5) + "s";
+  document.body.appendChild(rose);
 }
 </script>
 

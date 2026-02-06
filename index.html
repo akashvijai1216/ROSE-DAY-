@@ -5,85 +5,140 @@
   <title>Happy Rose Day ❤️</title>
   <style>
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      padding: 20px;
-      color: #5a0f2e;
+      color: #fff;
     }
+
+    .container {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 30px;
+      border-radius: 20px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 0 30px rgba(255,0,0,0.4);
+      max-width: 600px;
+      z-index: 2;
+    }
+
     h1 {
+      margin-bottom: 10px;
       font-size: 2.5em;
     }
-    .card {
-      background: white;
-      border-radius: 15px;
-      padding: 20px;
-      max-width: 500px;
-      margin: 20px auto;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+
+    .hug {
+      font-size: 2.5em;
+      margin-bottom: 15px;
     }
-    img {
-      width: 100%;
-      border-radius: 12px;
-      margin-top: 10px;
+
+    .question {
+      font-size: 1.2em;
+      margin: 15px 0;
+      line-height: 1.5;
     }
-    textarea {
-      width: 100%;
-      height: 80px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin-top: 10px;
-      font-size: 14px;
+
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      font-size: 20px;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.8;
     }
-    button {
-      background: #e6005c;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 25px;
-      margin-top: 15px;
-      font-size: 16px;
-      cursor: pointer;
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) scale(0.8);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 0;
+      }
     }
-    button:hover {
-      background: #c4004f;
+
+    /* Rose emojis bloom */
+    .rose {
+      position: absolute;
+      font-size: 26px;
+      animation: bloom 8s linear infinite;
     }
-    footer {
-      margin-top: 20px;
-      font-style: italic;
+
+    @keyframes bloom {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(360deg);
+        opacity: 0;
+      }
     }
   </style>
 </head>
 <body>
 
-  <h1>🌹 Happy Rose Day, My Love 🌹</h1>
+  <div class="container">
+    <h1>Happy Rose Day 🌹</h1>
+    <div class="hug">🤗🤍🤗</div>
 
-  <div class="card">
-    <p><strong>Question 1:</strong><br>What do you like most about us?</p>
-    <img src="photo1.jpg" alt="Memory 1">
-    <textarea placeholder="Your answer here..."></textarea>
+    <div class="question">
+      💕 How did you feel when you hugged me for the first time?
+    </div>
+
+    <div class="question">
+      🌸 At what moments do you feel like you just want to hug me?
+    </div>
+
+    <div class="question">
+      ❤️ Does hugging me make you feel safe and calm?
+    </div>
+
+    <div class="hug">🤗🌹🤗</div>
   </div>
 
-  <div class="card">
-    <p><strong>Question 2:</strong><br>Which moment of ours made you smile the most?</p>
-    <img src="photo2.jpg" alt="Memory 2">
-    <textarea placeholder="Your answer here..."></textarea>
-  </div>
+  <script>
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+      document.body.appendChild(heart);
 
-  <div class="card">
-    <p><strong>Question 3:</strong><br>One thing you want us to do together soon?</p>
-    <img src="photo3.jpg" alt="Memory 3">
-    <textarea placeholder="Your answer here..."></textarea>
-  </div>
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
 
-  <button onclick="alert('Your answers made my Rose Day perfect ❤️')">
-    Send Love 💌
-  </button>
+    function createRose() {
+      const rose = document.createElement("div");
+      rose.classList.add("rose");
+      rose.innerHTML = "🌹";
+      rose.style.left = Math.random() * 100 + "vw";
+      rose.style.animationDuration = (Math.random() * 4 + 6) + "s";
+      document.body.appendChild(rose);
 
-  <footer>
-    Forever yours 🌹
-  </footer>
+      setTimeout(() => {
+        rose.remove();
+      }, 8000);
+    }
+
+    setInterval(createHeart, 400);
+    setInterval(createRose, 800);
+  </script>
 
 </body>
 </html>
